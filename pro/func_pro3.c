@@ -15,7 +15,7 @@ int main()
 
 int multiply(int N, int sum, int i)
 {
-    if( i <= N) {
+    if(i <= N) {
         sum *= i;
         i++;
        return  multiply(N, sum, i);
