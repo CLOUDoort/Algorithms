@@ -24,9 +24,10 @@ int main()
         PrintNodeFrom(Node1);
         DestroyNode(Node3, Node1);
         printf("Node의 수는 : %d \n", CountNode(Node1));
+        printf("Node3가 있나요? : %s \n", HasNode(Node1, Node3) ? "true" : "false");
         return 0;
 }
-bool HasNode(struct Node* head, struct Node* search)
+bool HasNode(struct Node* search, struct Node* head)
 {
         bool x = false;
         while(head) {
