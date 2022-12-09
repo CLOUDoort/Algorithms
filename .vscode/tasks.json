@@ -37,13 +37,14 @@
 			}
 		},
 		{
-            "label": "exec",
-            "type": "shell",
-            "command": "${fileDirname}/${fileBasenameNoExtension}.out",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        }
+			"label": "exec",
+			"type": "shell",
+			"command": "${fileDirname}/${fileBasenameNoExtension}.out",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": []
+		}
 	]
 }
