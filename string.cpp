@@ -24,7 +24,7 @@ string::string(char c, int n) {
     len = n;
 }
 string::string(const char* s) {
-    for(len = 0; s[len] != '\0'; len++)
+    for(len = 0; s[len] != '\0'; len++);
     str = new char[len+1];
     for(int i = 0; i < len; i++) str[i] = s[i];
 }
