@@ -3,6 +3,7 @@
         "stdio.h": "c",
         "iostream": "cpp",
         "random": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "ios": "cpp"
     }
 }
