@@ -20,13 +20,24 @@ int LFirst(List *plist, LData *pdata) {
     *pdata = plist->arr[0];
     return TRUE;
 }
-int LNEXT(List *plist, LData *pdata) {
+int LNext(List *plist, LData *pdata) {
     if(plist->curPosition >= plist->numOfData -1) return FALSE;
     plist->curPosition++;
     *pdata = plist->arr[plist->curPosition];
     return TRUE;
 }
 
-// LData LRemove(List *plist) {
-//     plist->curPosition
-// }
+LData LRemove(List *plist) {
+    int rpos = plist->curPosition;
+    int num = plist->numOfData;
+    int i;
+    LData rdata = plist->arr[rpos];
+
+    for(i = rpos; i < num-1; i++) plist->arr[i] = plist->arr[i+1];
+    plist->curPosition--;
+    plist->numOfData--;
+    return rdata;
+}
+int LCount(List *plist) {
+    return plist->numOfData;
+}
