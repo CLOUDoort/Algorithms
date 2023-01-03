@@ -10,11 +10,6 @@ int main(void){
     for(char c : s1) a[c-'a']++;
     for(char c : s2) a[c-'a']--;
     
-    for(int i : a) {
-        if(i != 0) {
-            if(i >= 0) value += i;
-            else value -= i;
-        } 
-    }
+    for(int i : a) if(i != 0) value += abs(i);
     cout << value;
 }
