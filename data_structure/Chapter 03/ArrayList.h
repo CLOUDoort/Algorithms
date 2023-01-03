@@ -1,12 +1,12 @@
 // __ARRAY_LIST_H__가 정의되지 않으면 실행
 #ifndef __ARRAY_LIST_H__ 
 #define __ARRAY_LIST_H__
-
+#include "Point.h"
 #define TRUE 1
 #define FALSE 0
 
 #define LIST_LEN 100
-typedef int LData;
+typedef Point *LData;
 
 typedef struct __ArrayList {
     LData arr[LIST_LEN];
