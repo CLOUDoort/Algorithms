@@ -24,6 +24,7 @@ int main(void) {
         ++len;
     }
 
+    // i는 순서, cur은 현재 숫자
     int i = 1;
     // 연결 리스트를 순회하며 순열 생성
     for(int cur = 1; len != 0; cur = nxt[cur]) {
