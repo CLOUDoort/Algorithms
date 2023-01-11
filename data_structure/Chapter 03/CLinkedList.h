@@ -23,7 +23,7 @@ typedef CList List;
 void ListInit(List *plist);
 
 // 꼬리에 추가
-void LInsert(List plist, Data data);
+void LInsert(List *plist, Data data);
 // 헤드에 추가
 void LInsertFront(List *plist, Data data);
 
