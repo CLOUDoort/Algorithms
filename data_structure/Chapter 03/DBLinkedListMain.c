@@ -19,8 +19,21 @@ int main(void) {
     if(LFirst(&list, &data)) {
         printf("%d ", data);
         while(LNext(&list, &data)) printf("%d ", data);
-        while(LPrevious(&list, &data)) printf("%d ", data);
         printf("\n\n");
+    }
+
+    if(LFirst(&list, &data)) {
+        if(data % 2 == 0)  {
+            Data repoData = LRemove(&list);
+            printf("삭제 데이터 : %d \n", repoData);
+        }
+        while(LNext(&list, &data)) {
+            if(data % 2 == 0) {
+                LRemove(&list);
+                Data repoData = LRemove(&list);
+                printf("삭제 데이터 : %d \n", repoData);
+            }
+        }
     }
     return 0;
 }
