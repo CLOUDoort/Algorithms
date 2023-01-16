@@ -4,11 +4,13 @@ using namespace std;
 #define ll long long
 
 stack<int> s;
-int N, ans;
+int N;
+ll ans;
 
 int main(void) {
     ios::sync_with_stdio(0);
     cin.tie(0);
+
     cin >> N;
     ll height;
     while(N--) {
