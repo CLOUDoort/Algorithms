@@ -10,6 +10,7 @@
         "string_view": "c",
         "vector": "c",
         "iosfwd": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "stack": "cpp"
     }
 }
