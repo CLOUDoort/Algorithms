@@ -25,6 +25,6 @@ int main(void){
         }
         if(!s.empty()) isWrong = true;
         if(isWrong) cout << "no\n";
-        else cout << "no\n";
+        else cout << "yes\n";
     }
 }
