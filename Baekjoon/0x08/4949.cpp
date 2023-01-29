@@ -7,16 +7,24 @@ int main(void){
     while(1) {
         stack<char> s;
         string a;
-        cin >> a;
-        if(a == ".") return 0;
-        for(int i = 0; i < a.length(); i++) {
-            if(a[i] == '(') {
-
+        bool isWrong = false;
+        getline(cin, a);
+        if(a == ".") break;
+        for(auto c : a) {
+            if(c == '(' || c == '[') {
+                if(c == '(') s.push(')');
+                else s.push(']');
             }
-            else if(a[i] == '[') {
-
+            else if(c == ')' || c == ']' ) {
+                if(s.empty() || s.top() != c) {
+                    isWrong = true;
+                    break;
+                }
+                s.pop(); 
             }
-            else continue;
         }
+        if(!s.empty()) isWrong = true;
+        if(isWrong) cout << "no\n";
+        else cout << "no\n";
     }
 }
