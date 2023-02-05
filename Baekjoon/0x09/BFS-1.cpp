@@ -32,7 +32,8 @@ int main(void){
         if(nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
         if(vis[nx][ny] || board[nx][ny] != 1) continue;
         vis[nx][ny] = 1;
-        Q.push({nx, ny}); 
+        Q.push({nx, ny});
+         
     }
     }
 }
