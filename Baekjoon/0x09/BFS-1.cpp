@@ -23,16 +23,16 @@ int main(void){
     vis[0][0] = 1;
     Q.push({0, 0});
     while(!Q.empty()){
-    pair<int, int> cur = Q.front(); Q.pop();
-    cout << '(' << cur.X << ", " << cur.Y << ") -> ";
-    for(int dir = 0; dir < 4; dir++){
-        int nx = cur.X + dx[dir];
-        int ny = cur.Y + dy[dir];
+        pair<int, int> cur = Q.front(); Q.pop();
+        cout << '(' << cur.X << ", " << cur.Y << ") -> ";
+        for(int dir = 0; dir < 4; dir++){
+            int nx = cur.X + dx[dir];
+            int ny = cur.Y + dy[dir];
 
-        if(nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
-        if(vis[nx][ny] || board[nx][ny] != 1) continue;
-        vis[nx][ny] = 1;
-        Q.push({nx, ny});
-    }
+            if(nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
+            if(vis[nx][ny] || board[nx][ny] != 1) continue;
+            vis[nx][ny] = 1;
+            Q.push({nx, ny});
+        }
     }
 }
