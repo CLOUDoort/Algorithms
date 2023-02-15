@@ -18,64 +18,56 @@ int vis[101][101];
 int dx[4] = {1, 0, -1, 0};
 int dy[4] = {0, 1, 0, -1};
 
+void bfs(int i, int j) {
+    queue<pair <int, int>> Q;
+    Q.push({i, j});
+    vis[i][j] = 1;
+    while(!Q.empty()) {
+        auto cur = Q.front(); Q.pop();
+        char color = board[cur.X][cur.Y];
+        for(int dir = 0; dir < 4; dir++) {
+            int nx = cur.X+dx[dir];
+            int ny = cur.Y+dy[dir];
+            if(nx < 0 || nx >= N || ny < 0 || ny >= N) continue;
+            if(vis[nx][ny] || board[nx][ny] != color) continue;
+            Q.push({nx, ny});
+            vis[nx][ny] = 1;
+        }
+    }
+}
+
+int area() {
+    int ans = 0;
+    for(int i = 0; i < N; i++) {
+        for(int j = 0; j < N; j++) {
+            if(!vis[i][j]) {
+                ans++;
+                bfs(i, j);
+            }
+        }
+    }
+    return ans;
+}
 int main(void) {
     ios::sync_with_stdio(0);
     cin.tie(0);
     cin >> N;
     for(int i = 0; i < N; i++) cin >> board[i];
-    queue<pair<int, int>> Q;
 
     // 색약 없는 사람
-    int ans = 0;
-    for(int i = 0; i < N; i++) {
-        for(int j = 0; j < N; j++) {
-            if(vis[i][j]) continue;
-            Q.push({i, j});
-            vis[i][j] = 1;
-            ans++;
-            while(!Q.empty()) {
-                auto cur = Q.front(); Q.pop();
-                char color = board[cur.X][cur.Y];
-                for(int dir = 0; dir < 4; dir++) {
-                    int nx = cur.X+dx[dir];
-                    int ny = cur.Y+dy[dir];
-                    if(nx < 0 || nx >= N || ny < 0 || ny >= N) continue;
-                    if(vis[nx][ny] || board[nx][ny] != color) continue;
-                    Q.push({nx, ny});
-                    vis[nx][ny] = 1;
-                }
-            }
-        }
-    }
-    cout << ans;
+    int no_color_weakness = area();
+    cout << no_color_weakness << ' ';
 
     // 다시 초기화
-    ans = 0;
     for(int i = 0; i < N; i++) fill(vis[i], vis[i]+N, 0);
-    // 적록색약 있는 사람
+    // 적록색약 있는 사람은 R과 G가 같으니 R를 G로 바꿔준다.
     for(int i = 0; i < N; i++) {
         for(int j = 0; j < N; j++) {
-            if(vis[i][j]) continue;
-            Q.push({i, j});
-            vis[i][j] = 1;
-            ans++;
-            while(!Q.empty()) {
-                auto cur = Q.front(); Q.pop();
-                char color = board[cur.X][cur.Y];
-                for(int dir = 0; dir < 4; dir++) {
-                    int nx = cur.X+dx[dir];
-                    int ny = cur.Y+dy[dir];
-                    if(nx < 0 || nx >= N || ny < 0 || ny >= N) continue;
-                    if(color == 'B') {
-                        if(vis[nx][ny] || board[nx][ny] != color) continue;
-                    } else {
-                        if(vis[nx][ny] || board[nx][ny] == 'B') continue;
-                    }
-                    Q.push({nx, ny});
-                    vis[nx][ny] = 1;
-                }
+            if(board[i][j] == 'R') {
+                board[i][j] = 'G';
             }
         }
     }
-    cout << " " << ans;
+    int color_weakness = area();
+    cout << color_weakness;
 }
