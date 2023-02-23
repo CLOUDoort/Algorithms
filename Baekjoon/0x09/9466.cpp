@@ -56,10 +56,12 @@ int main(void) {
         fill(state+1, state+n+1, 0);
         for(int i = 1; i <= n; i++) cin >> arr[i];
         int ans = 0;
+        // 방문하지 않은 학생들만 run
         for(int i = 1; i <= n; i++) {
             if(state[i] == NOT_VISITED) run(i);
         }
         int cnt = 0;
+        // 사이클에 포함되지 않은 학생 수
         for(int i = 1; i <= n; i++) {
             if(state[i] != CYCLE_IN) cnt++;
         }
