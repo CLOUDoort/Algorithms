@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(void) {
+int main() {
     FILE *fp1 = fopen("data1.txt", "r");
     if(fp1 == NULL) {
         printf("Error\n");
@@ -59,4 +59,5 @@ int main(void) {
     free(arr2);
     fclose(fp1);
     fclose(fp2);
+    return 0;
 }
