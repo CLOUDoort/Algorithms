@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-void SequentialSearch(char arr[][4], int n, char* target) {
+void SequentialSearch(char (*arr)[4], int n, char* target) {
     for(int i = 0; i < n; i++) {
         if(strcmp(arr[i], target) == 0) {
             printf("Sequential search result: S\n");
@@ -10,7 +10,7 @@ void SequentialSearch(char arr[][4], int n, char* target) {
     printf("Sequential search result: F\n"); 
 }
 
-int BinarySearch(char arr[][4], int n, char* target) {
+int BinarySearch(char (*arr)[4], int n, char* target) {
     int first = 0;
     int last = n-1;
     while(first <= last) {
@@ -28,7 +28,7 @@ int BinarySearch(char arr[][4], int n, char* target) {
     return 0;
 }
 
-int RecursiveBinarySearch(char arr[][4], int first, int last, char* target) {
+int RecursiveBinarySearch(char (*arr)[4], int first, int last, char* target) {
     // Recursive는 while이 아닌 if
     if(first <= last) {
         int mid = (first+last)/2;
