@@ -10,7 +10,7 @@ int n, s, cnt;
 int arr[30];
 
 void func(int cur, int tot) {
-    if(cur == s) {
+    if(cur == n) {
         if(tot == s) cnt++;
         return;
     }
