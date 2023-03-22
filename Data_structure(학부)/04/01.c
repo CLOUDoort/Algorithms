@@ -18,13 +18,12 @@ int** make2dArray(int row, int column) {
     return newArray;
 }
 
-int** init2dArray(int** arr, int row, int column) {
+void init2dArray(int** arr, int row, int column) {
     for(int i = 0; i < row; i++) {
         for(int j = 0; j < column; j++) {
             scanf("%d", &arr[i][j]);
         }
     }
-    return arr;
 }
 
 void print2dArray(int** arr_A, int** arr_B, int row, int column) {
@@ -50,9 +49,9 @@ int main() {
     int** array_A = make2dArray(row, column);
     int** array_B = make2dArray(row, column);
     printf("Input A matrix : \n");
-    array_A = init2dArray(array_A, row, column);
+    init2dArray(array_A, row, column);
     printf("Input B matrix : \n");
-    array_B = init2dArray(array_B, row, column);
+    init2dArray(array_B, row, column);
     print2dArray(array_A, array_B, row, column);
     free2dArray(array_A, row, column);
     free2dArray(array_B, row, column);
