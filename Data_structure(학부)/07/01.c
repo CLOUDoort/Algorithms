@@ -103,9 +103,9 @@ int main() {
     }
     fscanf(fp, "%d %d", &row, &col);
     EXIT_ROW = row; EXIT_COL = col;
-    for(int i = 0; i < MAX_SIZE; i++) {
-        for(int j = 0; j < MAX_SIZE; j++) {
-            maze[i][j] = -1;
+    for(int i = 0; i < row+2; i++) {
+        for(int j = 0; j < col+2; j++) {
+            maze[i][j] = 1;
             mark[i][j] = -1;
         }
     }
