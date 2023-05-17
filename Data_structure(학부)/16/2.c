@@ -29,8 +29,6 @@ treePointer modifiedSearch(treePointer node, int target);
 void deleteNode(treePointer *node, int target);
 void inOrderTraversal(treePointer node);
 void eraseNode(treePointer *node);
-treePointer delNodeSearch(treePointer node, int target);
-treePointer delParentSearch(treePointer node, int target);
 
 int main() {
     FILE *fp = fopen("in.txt", "r");
@@ -60,88 +58,43 @@ int main() {
 }
 
 void deleteNode(treePointer *node, int target) {
-    treePointer delNode = delNodeSearch(*node, target);
-    treePointer parent = delParentSearch(*node, target);
-    if(delNode) {
-        if(!(delNode->left) && !(delNode->right)) {
-            free(delNode);
-            printf("S ");
-            return;
-        }
-        else if(delNode->left && !(delNode->right)) {
-            if(parent == NULL) {
-                *node = delNode->left;
-            }
-            else {
-                if(delNode->data > parent->data) {
-                    parent->right = delNode->left;
-                }
-                else parent->left = delNode->left;
-            }
-            free(delNode);
-            printf("S ");
-            return;
-        }
-        else if(delNode->right && !(delNode->left)) {
-            if(parent == NULL) {
-                *node = delNode->right;
-            }
-            else {
-                if(delNode->data > parent->data) {
-                    parent->right = delNode->right;
-                }
-                else parent->left = delNode->right;
-            }
-            free(delNode);
-            printf("S ");
-            return;
-        }
-        else {
-            // 왼쪽 서브트리에서 가장 큰 값 찾기
-            treePointer searchNode = delNode;
-            treePointer replaceNode = delNode;
-            searchNode = searchNode->left;
-            while(searchNode) {
-                replaceNode = searchNode;
-                searchNode = searchNode->right;
-            }
-            delNode->data = replaceNode->data;
-            deleteNode(&(replaceNode), replaceNode->data);
-        }
-    }
-    else {
+    if(!(*node)) {
         printf("E ");
         return;
     }
-}
-
-treePointer delParentSearch(treePointer node, int target) {
-    if(!node) return NULL;
-    treePointer parent = NULL;
-    while(node) {
-        if(target == node->data) {
-            return parent;
+    if((*node)->data > target) deleteNode(&((*node)->left), target);
+    else if((*node)->data < target) deleteNode(&((*node)->right), target);
+    else {
+        if(!((*node)->left) && !((*node)->right)){
+            free(*node);
+            printf("S ");
+            return;
         }
-        else if(target < node->data) {
-            parent = node;
-            node = node->left;
+        // 오른쪽 서브트리만 있는 경우
+        else if(!((*node)->left)) {
+            treePointer temp = *node;
+            *node = (*node)->right;
+            free(temp);
+            printf("S ");
+            return;
+        }
+        // 왼쪽 서브트리만 있는 경우
+        else if(!((*node)->right)) {
+            treePointer temp = *node;
+            *node = (*node)->left;
+            free(temp);
+            printf("S ");
+            return;
         }
         else {
-            parent = node;
-            node = node->right;
+            treePointer minLeft = (*node)->left;
+            while(minLeft->right) {
+                minLeft = minLeft->right;
+            }
+            (*node)->data = minLeft->data;
+            deleteNode(&(minLeft), minLeft->data);
         }
     }
-    return NULL;
-}
-
-treePointer delNodeSearch(treePointer node, int target) {
-    if(!node) return NULL;
-    while(node) {
-        if(target == node->data) return node;
-        else if(target < node->data) node = node->left;
-        else node = node->right;
-    }
-    return NULL;
 }
 
 treePointer modifiedSearch(treePointer node, int target) {
