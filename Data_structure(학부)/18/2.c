@@ -2,6 +2,7 @@
 - 파일로부터 데이터 받아 리스트 만든다.
 - quicksort해준다.
     - pivot값을 배열의 첫번째 원소 값으로 설정하여 비교하면서 정렬한다.
+- 파일에 출력한다.
 - 파일 닫는다.
 */
 
@@ -14,20 +15,25 @@ int list[20];
 void quickSort(int left, int right);
 
 int main() {
-    FILE *fp = fopen("in.txt", "r");
-    if(fp == NULL) {
+    FILE *fp1 = fopen("in.txt", "r");
+    if(fp1 == NULL) {
+        printf("File read error\n");
+        exit(1);
+    }
+    FILE *fp2 = fopen("out.txt", "w");
+    if(fp2 == NULL) {
         printf("File read error\n");
         exit(1);
     }
     int cnt = 0;
-    while(fscanf(fp, "%d", &list[cnt++]) != EOF);
+    while(fscanf(fp1, "%d", &list[cnt++]) != EOF);
     cnt--;
 
     quickSort(0, cnt-1);
     for(int i = 0; i < cnt; i++) {
-        printf("%d ", list[i]);
+        fprintf(fp2, "%d ", list[i]);
     }
-    fclose(fp);
+    fclose(fp1); fclose(fp2);
     return 0;
 }
 
