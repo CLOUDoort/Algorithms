@@ -17,7 +17,7 @@ element table[MAX_ELEMENT];
 
 unsigned int stringToInt(char *key);
 int hashFunc(int key, int d);
-element search(int k, int d);
+element* search(int k, int d);
 
 int main() {
     FILE* fp1 = fopen("in.txt", "r");
@@ -39,8 +39,14 @@ int main() {
     while(fscanf(fp1, "%s", temp) != EOF) {
         int int_number = stringToInt(temp);
         int key = hashFunc(int_number, d);
-        table[key].key = int_number;
-        strcpy(table[key].data, temp);
+        if(!search(int_number, d)) {
+            table[key].key = int_number;
+            strcpy(table[key].data, temp);
+        }
+        else {
+            printf("table full\n");
+            exit(1);
+        }
     }
 
     printf("\n");
@@ -48,9 +54,10 @@ int main() {
         int search_number = stringToInt(temp);
         int flag = 0;
         for(int i = 0; i < d; i++) {
-            if(table[i].key == search_number) {
+            if(search(search_number, d)) {
                 printf("S\n");
                 flag = 1;
+                break;
             }
         }
         if(!flag) printf("E\n");
@@ -66,6 +73,19 @@ int main() {
 
     fclose(fp1); fclose(fp2);
     return 0;
+}
+
+element* search(int k, int d) {
+    int homeBucket, currentBucket;
+    homeBucket = hashFunc(k, d);
+    for(currentBucket = homeBucket; table[currentBucket].key && table[currentBucket].key != k;) {
+        currentBucket = (currentBucket+1)%d;
+        if(currentBucket == homeBucket) return NULL;
+    }
+    if(table[currentBucket].key == k) {
+        return &table[currentBucket];
+    }
+    return NULL;
 }
 
 

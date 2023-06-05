@@ -59,9 +59,10 @@ int main() {
         int search_number = stringToInt(temp);
         int flag = 0;
         for(int i = 0; i < d; i++) {
-            if(ht[i]->key == search_number) {
+            if(search(search_number, d)) {
                 printf("S\n");
                 flag = 1;
+                break;
             }
         }
         if(!flag) printf("E\n");
