@@ -1,10 +1,3 @@
-/*
-- 파일을 읽고 insert한다.
-- insert할 때 modifiedSearch 함수를 통해 어디에 insert할 지 탐색한다.
-- tree 구성하고 inOrderTraversal해준다.
-- node를 erase 한다.
-- 파일 닫는다.
-*/
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -17,11 +10,11 @@ typedef struct node {
 treePointer createNode();
 void insert(treePointer *node, int target);
 treePointer modifiedSearch(treePointer node, int target);
-void inOrderTraversal(treePointer root);
-void eraseNode(treePointer *root);
+void inOrderTraversal(treePointer node);
+void eraseNode(treePointer *node);
 
 int main() {
-    FILE *fp = fopen("in.txt", "r");
+    FILE* fp = fopen("in.txt", "r");
     if(fp == NULL) {
         printf("File read error\n");
         exit(1);
@@ -35,13 +28,11 @@ int main() {
     return 0;
 }
 
-// tree is empty or target is present return NULL
-// else return a pointer(to the last node)
 treePointer modifiedSearch(treePointer node, int target) {
     if(!node) return NULL;
     while(node) {
         if(target == node->key) return NULL;
-        if(target < node->key) {
+        else if(target < node->key) {
             if(!(node->leftChild)) return node;
             node = node->leftChild;
         }
@@ -61,8 +52,9 @@ void insert(treePointer *node, int target) {
         if(*node) {
             if(target < temp->key) temp->leftChild = ptr;
             else temp->rightChild = ptr;
+        } else {
+            *node = ptr;
         }
-        else *node = ptr;
     }
 }
 
@@ -74,10 +66,10 @@ void inOrderTraversal(treePointer node) {
     }
 }
 
-void eraseNode(treePointer *root) {
+void eraseNode(treePointer *node) {
     treePointer delNode;
-    delNode = *root;
-    if(*root) {
+    delNode = *node;
+    if(*node) { 
         eraseNode(&(delNode->leftChild));
         eraseNode(&(delNode->rightChild));
         free(delNode);
@@ -87,11 +79,10 @@ void eraseNode(treePointer *root) {
 treePointer createNode() {
     treePointer newNode = (treePointer)malloc(sizeof(*newNode));
     if(newNode == NULL) {
-        printf("Malloc error\n");
+        printf("malloc error\n");
         exit(1);
     }
     newNode->leftChild = NULL;
     newNode->rightChild = NULL;
-
     return newNode;
 }

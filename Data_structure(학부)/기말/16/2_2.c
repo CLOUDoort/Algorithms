@@ -1,19 +1,3 @@
-/*
-- 파일로부터 데이터 입력받아 이진탐색트리를 만든다.
-- 파일로부터 삭제할 데이터 입력받아 삭제한다.
-    - 서브트리가 없는 경우
-        - 단순하게 삭제할 노드 바로 free해준다.
-    - 왼쪽 서브트리, 또는 오른쪽 서브트리가 있는 경우
-        - 삭제할 노드와 삭제할 노드의 Parent node를 찾는다.
-        - 삭제할 노드가 root노드일 경우와 아닌 경우를 나눠준다.
-        - parent노드와 삭제할 노드의 데이터 크기 비교해서 적절하게 옮겨준다.
-    - 왼쪽 서브트리와 오른쪽 서브트리가 모두 있는 경우
-        - 왼쪽 서브 트리 중에서 가장 큰 값을 찾아 replace하고 삭제하거나 오른쪽 서브트리의 가장 작은 값을 찾아 replace하고 삭제한다.
-- inOrderTraversal한다.
-- 메모리 해제한다.
-- 파일닫는다.
-*/
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -65,26 +49,21 @@ void deleteNode(treePointer *node, int target) {
     if((*node)->data > target) deleteNode(&((*node)->left), target);
     else if((*node)->data < target) deleteNode(&((*node)->right), target);
     else {
-        if(!((*node)->left) && !((*node)->right)){
+        if(!((*node)->left) && !((*node)->right)) {
             free(*node);
             printf("S ");
             return;
         }
-        // 오른쪽 서브트리만 있는 경우
         else if(!((*node)->left)) {
             treePointer temp = *node;
             *node = (*node)->right;
             free(temp);
-            printf("S ");
-            return;
+            printf("S "); return;
         }
-        // 왼쪽 서브트리만 있는 경우
         else if(!((*node)->right)) {
             treePointer temp = *node;
             *node = (*node)->left;
-            free(temp);
-            printf("S ");
-            return;
+            free(temp); printf("S "); return;
         }
         else {
             treePointer minLeft = (*node)->left;
@@ -135,8 +114,7 @@ void inOrderTraversal(treePointer node) {
 }
 
 void eraseNode(treePointer *node) {
-    treePointer delNode;
-        delNode = *node;
+    treePointer delNode = *node;
     if(*node) {
         eraseNode(&(delNode->left));
         eraseNode(&(delNode->right));
