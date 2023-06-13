@@ -39,8 +39,7 @@ int main() {
     scanf("%d", &d);
     char temp[4];
     for(int i = 0; i < d; i++) {
-        elementPointer newNode = createNode();
-        ht[i] = newNode;
+        ht[i] = createNode();
     }
     while(fscanf(fp1, "%s", temp) != EOF) {
         int num = stringToInt(temp);
