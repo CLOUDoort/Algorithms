@@ -93,7 +93,7 @@ void insertNode(nodePointer *head, int data) {
     nodePointer newNode = createNode(), cur = *head, pre = *head;
     newNode->data = data;
     if(*head) {
-        if((*head)->data > data) {
+        if((*head)->data >= data) {
             newNode->llink = NULL;
             newNode->rlink = *head;
             (*head)->llink = newNode;

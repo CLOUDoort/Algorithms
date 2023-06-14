@@ -31,7 +31,7 @@ int main() {
         push(newElement);
         cnt++;
     }
-    for(int i = 1; i <= cnt; i++) {
+    for(int i = 1; i <= n; i++) {
         printf("%d ", heap[i].key);
     }
     printf("\n");

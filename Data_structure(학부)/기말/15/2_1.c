@@ -21,7 +21,7 @@ int main() {
     }
     int cnt = 0;
     fscanf(fp, "%d", &cnt);
-    element newElement; char data;
+    element newElement;
     while(cnt--) {
         fscanf(fp, " %c", &newElement.data);
         push(newElement);
