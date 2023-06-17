@@ -43,7 +43,7 @@ void row_check(int x, int y) {
         }
     }
     ans++;
-    cout << "row: (" << x << " " << y << ")\n";
+    // cout << "row: (" << x << " " << y << ")\n";
 }
 void col_check(int x, int y) {
     int length = 1;
@@ -83,7 +83,7 @@ void col_check(int x, int y) {
         }
     }
     ans++;
-    cout << "col: (" << x << " " << y << ")\n";
+    // cout << "col: (" << x << " " << y << ")\n";
 }
 
 int main(void) {
