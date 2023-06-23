@@ -41,6 +41,7 @@ int test(int cnt) {
         if(check()) {
             return cnt;
         }
+        reset();
     } while(next_permutation(brute.begin(), brute.end()));
     return 0x7f7f7f7f;
 }
@@ -69,7 +70,6 @@ int main(void) {
     int ans = 0x7f7f7f7f;
     for(int i = 1; i <= 3; i++) {
         ans = min(ans, test(i));
-        reset();
     }
     if(ans == 0x7f7f7f7f) ans = -1;
     cout << ans;
