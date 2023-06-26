@@ -4,48 +4,24 @@
 
 #include <bits/stdc++.h>
 using namespace std;
+#define X first
+#define Y second
 
 int n, m, h;
 bool ladder[32][12];
-bool temp[32][12];
 vector<pair<int, int>> line;
-void reset() {
-    for(int i = 1; i <= h; i++) {
-        for(int j = 1; j <= n; j++) {
-            temp[i][j] = ladder[i][j];
-        }
-    }
-}
 
 bool check() {
     for(int i = 1; i <= n; i++) {
         int tmp = i;
         for(int j = 1; j <= h; j++) {
-            if(temp[j][tmp]) tmp++;
-            else if(temp[j][tmp-1]) tmp--;
+            if(ladder[j][tmp]) tmp++;
+            else if(ladder[j][tmp-1]) tmp--;
         }
         if(tmp != i) return false;
     }
     return true;
 }
-
-int test(int cnt) {
-    vector<int> brute(line.size(), 1);
-    fill(brute.begin(), brute.end()-cnt, 0);
-    do {
-        for(int i = 0; i < line.size(); i++) {
-            if(brute[i]) {
-                temp[line[i].first][line[i].second] = 1;
-            }
-        }
-        if(check()) {
-            return cnt;
-        }
-        reset();
-    } while(next_permutation(brute.begin(), brute.end()));
-    return 0x7f7f7f7f;
-}
-
 
 int main(void) {
     ios::sync_with_stdio(0);
@@ -58,19 +34,33 @@ int main(void) {
     }
     for(int i = 1; i <= h; i++) {
         for(int j = 1; j < n; j++) {
-            if(ladder[i][j] || ladder[i][j-1] || ladder[i][j+1]) continue;
+            if(ladder[i][j-1] || ladder[i][j] || ladder[i][j+1]) continue;
             line.push_back({i, j});
         }
     }
-    reset();
     if(check()) {
         cout << 0;
         return 0;
     }
+    
     int ans = 0x7f7f7f7f;
-    for(int i = 1; i <= 3; i++) {
-        ans = min(ans, test(i));
+    int sz = line.size();
+    for(int i = 0; i < sz; i++) {
+        ladder[line[i].X][line[i].Y] = true;
+        if(check()) ans = min(ans, 1);
+        for(int j = i+1; j < sz; j++) {
+            ladder[line[j].X][line[j].Y] = true;
+            if(check()) ans = min(ans, 2);
+            for(int k = j+1; k < sz; k++) {
+                ladder[line[k].X][line[k].Y] = true;
+                if(check()) ans = min(ans, 3);
+                ladder[line[k].X][line[k].Y] = false;
+            }
+            ladder[line[j].X][line[j].Y] = false;
+        }
+        ladder[line[i].X][line[i].Y] = false;
     }
+    
     if(ans == 0x7f7f7f7f) ans = -1;
     cout << ans;
 }
