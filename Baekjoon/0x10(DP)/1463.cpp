@@ -18,14 +18,10 @@ int main(void) {
         }
         int nx;
         for(int dir = 0; dir < 3; dir++) {
-            if(dir == 0) {
-                nx = cur+dx[dir];
-            }
+            if(dir == 0) nx = cur+dx[dir];
             else nx = cur * dx[dir];
-            
-            if(nx > n) continue;
-            if(!arr[nx]) arr[nx] = arr[cur]+1;
-            else continue;
+            if(nx > n || arr[nx]) continue;
+            arr[nx] = arr[cur]+1;
             q.push(nx);
         }
     }
