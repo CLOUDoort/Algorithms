@@ -1,7 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define X first
-#define Y second
 
 int w[102], v[102], d[100002];
 
