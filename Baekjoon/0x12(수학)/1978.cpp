@@ -13,7 +13,7 @@ int main(void) {
     ios::sync_with_stdio(0);
     cin.tie(0);
     int n, ans = 0; cin >> n;
-    for(int i = 0; i < n; i++) {
+    while(n--) {
         int a; cin >> a;
         if(isPrime(a)) ans++;
     }
