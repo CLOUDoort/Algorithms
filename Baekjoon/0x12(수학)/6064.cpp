@@ -5,11 +5,15 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// gcd(20, 12) => gcd(12, 8) => gcd(8, 4) => gcd(4, 0)
 int gcd(int a, int b) {
     if(b == 0) return a;
     return gcd(b, a%b);
 }
 
+// a*b = gcd(a, b)*lcm(a*b)
+// lcm(a, b) = a*b/gcd(a, b);
+// int overflow 막기 위해 b를 나중에 곱해준다.
 int lcm(int a, int b) {
     return a/gcd(a,b)*b;
 }
