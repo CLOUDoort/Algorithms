@@ -15,10 +15,8 @@ int main(void) {
                 break;
             }
         }
-        if(j % 2 == 0) j /= 2;
-        else j = j/2+1;
-        if(h % 2 == 0) h /= 2;
-        else h = h/2+1;
+        j = (j+1)/2;
+        h = (h+1)/2;
         n /= 2;
     }
     if(flag) cout << ans;
