@@ -1,5 +1,4 @@
 // 투포인터
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -11,12 +10,11 @@ int main(void) {
     int n, m; cin >> n >> m;
     for(int i = 0; i < n; i++) cin >> a[i];
     sort(a, a+n);
-    int mn = 0x7fffffff;
-    int en = 0;
-    for(int st = 0; st < n; st++) {
-        while(en < n && a[en] - a[st] < m) en++;
+    int mn = 0x7fffffff, en = 0;
+    for(int i = 0; i < n; i++) {
+        while(en < n && a[en] - a[i] < m) en++;
         if(en == n) break;
-        mn = min(mn, a[en]-a[st]);
+        mn = min(mn,a[en]-a[i]);
     }
     cout << mn;
 }
