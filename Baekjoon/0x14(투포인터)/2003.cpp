@@ -1,30 +1,28 @@
+// 연속한 수에서 경우의 수 => 정렬x
+
 #include <bits/stdc++.h>
-typedef long long ll;
 using namespace std;
 
-ll pf_sum[10005];
+int a[10002];
 
-int main(void){
+int main(void) {
   ios::sync_with_stdio(0);
   cin.tie(0);
-
-  int n, m;
-  cin >> n >> m;
-
-  pf_sum[0] = 0;
-  for (int i = 1; i <= n; i++) cin >> pf_sum[i], pf_sum[i] += pf_sum[i - 1];
-
-  int lp = 0, rp = 0;
-  int ans = 0;
-
-  while (rp <= n) {
-    ll csum = pf_sum[rp] - pf_sum[lp];
-    if (csum <= m) {
-      if (csum == m) ans++;
-      rp++;
+  int n, m; cin >> n >> m;
+  for(int i = 0; i < n; i++) cin >> a[i];
+  int ans = 0, en = 0, tot = a[0];
+  for(int i = 0; i < n; i++) {
+    while(en < n && tot < m) {
+      en++;
+      if(a[en] == m) {
+        tot = 0;
+        break;
+      }
+      tot += a[en];
     }
-    else lp++;
+    if(en == n) break;
+    if(tot == m) ans++;
+    else if(tot > m) tot -= a[en];
   }
-
   cout << ans;
 }
