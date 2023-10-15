@@ -16,13 +16,17 @@ int main(void) {
       en++;
       if(a[en] == m) {
         tot = 0;
+        ans++;
         break;
       }
       tot += a[en];
     }
     if(en == n) break;
-    if(tot == m) ans++;
-    else if(tot > m) tot -= a[en];
+    if(tot == m) {
+      ans++;
+      tot -= a[i];
+    }
+    else if(tot > m) tot -= a[i];
   }
   cout << ans;
 }
