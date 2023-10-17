@@ -1,25 +1,18 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<string> enter, leave;
-bool comp(string a, string b) {
-    return a > b;
-}
+unordered_set<string> s;
 
 int main(void) {
     ios::sync_with_stdio(0);
     cin.tie(0);
     int n; cin >> n;
-    for(int i = 0; i < n; i++) {
+    while(n--) {
         string name, log; cin >> name >> log;
-        if(log == "enter") enter.push_back(name);
-        else leave.push_back(name);
+        if(log == "enter") s.insert(name);
+        else s.erase(name);
     }
-    sort(enter.begin(), enter.end(), comp);
-    sort(leave.begin(), leave.end(), comp);
-    for(int i = 0; i < (int)enter.size(); i++) {
-        if(!binary_search(leave.begin(), leave.end(), enter[i])) {
-            cout << enter[i] << '\n';
-        }
-    }
+    vector<string> ans(s.begin(), s.end());
+    sort(ans.begin(), ans.end(), greater<string>());
+    for(string a : ans) cout << a << '\n';
 }
